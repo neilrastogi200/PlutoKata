@@ -1,63 +1,104 @@
 ﻿using NUnit.Framework;
 using RoverKata;
+using RoverKata.Direction;
 
 namespace RoverKataTests
 {
     [TestFixture]
     public class RoverTests
     {
+        private IGrid _grid;
+
+        [SetUp]
+        public void Setup()
+        {
+            _grid = new Grid(100);
+        }
+
+
         [Test]
         public void Given_Position_With_Default_Direction_And_Forward_Command_Returns_0_1_N()
         {
-          
-            var rover = new Rover(100);
+            //Arrange
+            var rover = new Rover(_grid);
 
-            rover.Move(0, 0, 'N', "F");
+            //Act
+            rover.Forward();
 
+            //Assert
             Assert.That(rover.CoordinateX, Is.EqualTo(0));
             Assert.That(rover.CoordinateY, Is.EqualTo(1));
-            Assert.That(rover.Direction, Is.EqualTo('N'));
-            
-        }
-
-        [Test]
-        public void When_Rover_Is_Created_And_Command_Is_Turn_Right_Expected_Direction_Is_East()
-        {
-            var rover = new Rover(100);
-
-            rover.Move(0, 0, 'N', "R");
-
-            Assert.That(rover.CoordinateX, Is.EqualTo(0));
-            Assert.That(rover.CoordinateY, Is.EqualTo(0));
-            Assert.That(rover.Direction, Is.EqualTo('E'));
-
+            Assert.That(rover.Direction, Is.TypeOf(typeof(North)));
 
         }
 
         [Test]
-        public void When_Rover_Is_Created_And_Command_Is_Turn_Left_Expected_Direction_Is_West()
+        public void When_Rover_Is_Created_And_Turn_Left_The_Direction_Is_West()
         {
-            var rover = new Rover(100);
+            //Arrange
+            var rover = new Rover(_grid);
+            //Act
+            rover.TurnLeft();
+            //Assert
+            Assert.That(rover.Direction, Is.TypeOf<West>());
+        }
 
-            rover.Move(0, 0, 'N', "L");
 
-            Assert.That(rover.CoordinateX, Is.EqualTo(0));
-            Assert.That(rover.CoordinateY, Is.EqualTo(0));
-            Assert.That(rover.Direction, Is.EqualTo('W'));
+        [Test]
+        public void When_Rover_Is_Created_And_Turn_Right_The_Direction_Is_East()
+        {
+            //Arrange
+            var rover = new Rover(_grid);
+            //Act
+            rover.TurnRight();
+            //Assert
+            Assert.That(rover.Direction, Is.TypeOf<East>());
+        }
 
+
+        [Test]
+        public void When_Rover_Command_Is_Right_And_The_Direction_Is_East()
+        {
+            //Arrange
+            var rover = new Rover(_grid);
+            var command = "R";
+            //Act
+            rover.ExecuteCommands(command);
+         
+        }
+
+
+        [Test]
+        public void When_Rover_Command_Is_Left_And_The_Direction_Is_East()
+        {
+            //Arrange
+            var rover = new Rover(_grid);
+            var command = "L";
+            //Act
+            rover.ExecuteCommands(command);
 
         }
 
         [Test]
-        public void When_Rover_Is_Created_And_Command_Is_Forward_And_Direction_Is_South()
+        public void When_Rover_Command_Is_Backwards_And_The_Direction_Is_East()
         {
-            var rover = new Rover(100);
+            //Arrange
+            var rover = new Rover(_grid);
+            var command = "B";
+            //Act
+            rover.ExecuteCommands(command);
 
-            rover.Move(0, 1, 'S', "F");
+        }
 
-            Assert.That(rover.CoordinateX, Is.EqualTo(0));
-            Assert.That(rover.CoordinateY, Is.EqualTo(0));
-            Assert.That(rover.Direction, Is.EqualTo('S'));
+        [Test]
+        public void When_Rover_Command_Is_Forward_And_The_Direction_Is_East()
+        {
+            //Arrange
+            var rover = new Rover(_grid);
+            var command = "B";
+            //Act
+            rover.ExecuteCommands(command);
+
         }
 
 

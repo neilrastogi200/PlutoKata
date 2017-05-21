@@ -44,6 +44,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DirectionEnum.cs" />
+    <Compile Include="Direction\East.cs" />
+    <Compile Include="Direction\North.cs" />
+    <Compile Include="Direction\South.cs" />
+    <Compile Include="Direction\West.cs" />
+    <Compile Include="Grid.cs" />
+    <Compile Include="ICardinalDirectionPoint.cs" />
+    <Compile Include="IGrid.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Rover.cs" />

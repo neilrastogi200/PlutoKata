@@ -3,116 +3,79 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using RoverKata.Direction;
 
 namespace RoverKata
 {
     public class Rover
     {
-        public int CoordinateX { get; private set; }
-        public int CoordinateY { get; private set; }
+        private readonly IGrid _grid;
 
-        public char Direction { get; private set;}
+        public ICardinalDirectionPoint Direction { get; private set; }
 
-        private readonly int _gridSize;
-
-        public Rover(int gridSize)
+        public Rover(IGrid grid)
         {
-            CoordinateX = 0;
-            CoordinateY = 0;
-            _gridSize = gridSize;
+            _grid = grid;
+            Direction = new North(_grid);
+        }
 
+        public void TurnLeft()
+        {
+            Direction = Direction.TurnLeft();
+        }
 
+        public void TurnRight()
+        {
+            Direction = Direction.TurnRight();
+        }
+
+        public void Forward()
+        {
+            Direction.MoveForward();
+        }
+
+        public void Backward()
+        {
+            Direction.MoveBackward();
+        }
+
+        public int CoordinateX => _grid.CoordinateX;
+
+        public int CoordinateY => _grid.CoordinateY;
+
+        public override string ToString()
+        {
+            return $"X : {CoordinateX}, Y : {CoordinateY}, Direction : {Direction}";
         }
 
 
-
-        public void Move(int coordinateX, int coordinateY, char direction, string command)
+        public void ExecuteCommands(string command)
         {
-           var resultNorth = Enum.GetName(typeof (DirectionEnum), DirectionEnum.N);
-            var resultSouth = Enum.GetName(typeof (DirectionEnum), DirectionEnum.S);
+            char[] commands = command.ToCharArray();
 
-            if (resultNorth != null && (command == "F" && direction == Convert.ToChar(resultNorth)))
+            for (int index = 0; index < commands.Length; index++)
             {
-                Direction = direction;
-                IncreasePositionY();
-            }
-
-            if (resultSouth != null && (command == "F" && direction == Convert.ToChar(resultSouth)))
-            {
-                Direction = direction;
-                CoordinateY = coordinateY;
-                DecreasePositionY();
-            }
-
-            if (command == "L" || command == "R")
-            {
-                Direction = direction;
-                Turn(Convert.ToChar(command));
-            }
-        }
-
-        private void IncreasePositionY()
-        {
-            if (CoordinateY < _gridSize)
-            {
-                CoordinateY++;
-            }
-        }
-
-
-        private void DecreasePositionY()
-        {
-            if (CoordinateY > 0)
-            {
-                CoordinateY--;
-            }
-        }
-
-
-        private void Turn(char command)
-        {
-
-            var resultNorth = Enum.GetName(typeof(DirectionEnum), DirectionEnum.N);
-            var resultSouth = Enum.GetName(typeof(DirectionEnum), DirectionEnum.S);
-            var resultEast = Enum.GetName(typeof(DirectionEnum), DirectionEnum.E);
-            var resultWest = Enum.GetName(typeof(DirectionEnum), DirectionEnum.W);
-
-            if (command == 'L')
-            {
-                switch (Direction)
+                var comm = commands[index];
+                if (comm == 'L')
                 {
-                    case 'N':
-                        if (resultWest != null) Direction = Convert.ToChar(resultWest);
-                        break;
-                    case 'W':
-                        if (resultSouth != null) Direction = Convert.ToChar(resultSouth);
-                        break;
-                    case 'S':
-                        if (resultWest != null) Direction = Convert.ToChar(resultWest);
-                        break;
-                    default:
-                        break;
+                    TurnLeft();
+                }
+
+                if (comm == 'R')
+                {
+                    TurnRight();
+                }
+
+                if (comm == 'F')
+                {
+                    Forward();
+                }
+
+                if (comm == 'B')
+                {
+                    Backward();
                 }
             }
-            else if (command == 'R')
-            {
-                switch (Direction)
-                {
-                    case 'N':
-                        if (resultEast != null) Direction = Convert.ToChar(resultEast);
-                        break;
-                    case 'E':
-                        if (resultSouth != null) Direction = Convert.ToChar(resultSouth);
-                        break;
-                    case 'S':
-                        if (resultEast != null) Direction = Convert.ToChar(resultEast);
-                        break;
-                    default:
-                        break;
-                }
-            }
-
-
         }
     }
     }
