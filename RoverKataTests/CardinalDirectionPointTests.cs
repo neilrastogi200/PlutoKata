@@ -17,7 +17,7 @@ namespace RoverKataTests
         [SetUp]
         public void Setup()
         {
-            _grid = new Grid(100);
+            _grid = new Grid(100, new bool[2,1]);
         }
 
         [Test]

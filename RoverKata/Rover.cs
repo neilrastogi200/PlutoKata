@@ -10,6 +10,7 @@ namespace RoverKata
     public class Rover
     {
         private readonly IGrid _grid;
+    
 
         public ICardinalDirectionPoint Direction { get; private set; }
 
@@ -76,6 +77,8 @@ namespace RoverKata
                     Backward();
                 }
             }
+
         }
+
     }
-    }
+}

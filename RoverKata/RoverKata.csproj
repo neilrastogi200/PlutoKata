@@ -43,7 +43,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DirectionEnum.cs" />
     <Compile Include="Direction\East.cs" />
     <Compile Include="Direction\North.cs" />
     <Compile Include="Direction\South.cs" />
