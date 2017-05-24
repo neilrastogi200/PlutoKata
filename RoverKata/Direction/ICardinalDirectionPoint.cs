@@ -1,10 +1,10 @@
-﻿namespace RoverKata
+﻿namespace RoverKata.Direction
 {
     public interface ICardinalDirectionPoint
     {
         ICardinalDirectionPoint TurnLeft();
         ICardinalDirectionPoint TurnRight();
-        void MoveForward();
-        void MoveBackward();
+        bool MoveForward();
+        bool MoveBackward();
     }
 }

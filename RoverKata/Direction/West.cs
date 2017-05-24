@@ -1,4 +1,6 @@
-﻿namespace RoverKata.Direction
+﻿using RoverKata.Grid;
+
+namespace RoverKata.Direction
 {
     public class West : ICardinalDirectionPoint
     {
@@ -19,14 +21,14 @@
             return new North(_grid);
         }
 
-        public void MoveForward()
+        public bool MoveForward()
         {
-            _grid.DecreaseBackwardPositionX();
+           return _grid.DecreaseBackwardPositionX();
         }
 
-        public void MoveBackward()
+        public bool MoveBackward()
         {
-           _grid.IncreaseForwardPositionX();
+          return _grid.IncreaseForwardPositionX();
         }
 
         public override string ToString()

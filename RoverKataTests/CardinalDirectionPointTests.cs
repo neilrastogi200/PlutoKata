@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using NUnit.Framework;
 using RoverKata;
 using RoverKata.Direction;
+using RoverKata.Grid;
+using RoverKata.ObstacleDetection;
 
 namespace RoverKataTests
 {
@@ -17,7 +19,11 @@ namespace RoverKataTests
         [SetUp]
         public void Setup()
         {
-            _grid = new Grid(100, new bool[2,1]);
+            List<ObstacleDetection> obstacleDetections = new List<ObstacleDetection>() {new ObstacleDetection() {XCoordinate = 2, YCoordinate = 1} };
+                
+                
+                
+                _grid = new Grid(100, obstacleDetections );
         }
 
         [Test]

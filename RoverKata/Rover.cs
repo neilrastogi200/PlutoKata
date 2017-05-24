@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using RoverKata.Direction;
+using RoverKata.Grid;
 
 namespace RoverKata
 {
@@ -30,14 +31,14 @@ namespace RoverKata
             Direction = Direction.TurnRight();
         }
 
-        public void Forward()
+        public bool Forward()
         {
-            Direction.MoveForward();
+            return Direction.MoveForward();
         }
 
-        public void Backward()
+        public bool Backward()
         {
-            Direction.MoveBackward();
+            return Direction.MoveBackward();
         }
 
         public int CoordinateX => _grid.CoordinateX;
@@ -50,7 +51,7 @@ namespace RoverKata
         }
 
 
-        public void ExecuteCommands(string command)
+        public string ExecuteCommands(string command)
         {
             char[] commands = command.ToCharArray();
 
@@ -69,14 +70,37 @@ namespace RoverKata
 
                 if (comm == 'F')
                 {
-                    Forward();
+                    if (Forward())
+                    {
+                        foreach (var item in _grid.ObstacleDetected)
+                        {
+                            if (!string.IsNullOrEmpty(item.Message))
+                            {
+                                return item.Message;
+                            }
+                            break;
+                        }
+                    }
                 }
 
                 if (comm == 'B')
                 {
-                    Backward();
+                    if (Backward())
+                    {
+                        foreach (var item in _grid.ObstacleDetected)
+                        {
+                            if (!string.IsNullOrEmpty(item.Message))
+                            {
+                                return item.Message;
+                            }
+
+                            break;
+                        }
+                    }
                 }
             }
+
+            return null;
 
         }
 
