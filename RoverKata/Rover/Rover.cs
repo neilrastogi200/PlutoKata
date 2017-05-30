@@ -1,25 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using RoverKata.Direction;
+﻿using RoverKata.Direction;
 using RoverKata.Grid;
 
-namespace RoverKata
+namespace RoverKata.Rover
 {
-    public class Rover
+    public class Rover : IRover
     {
         private readonly IGrid _grid;
-    
-
-        public ICardinalDirectionPoint Direction { get; private set; }
 
         public Rover(IGrid grid)
         {
             _grid = grid;
             Direction = new North(_grid);
         }
+
+
+        public ICardinalDirectionPoint Direction { get; private set; }
+
+        public int CoordinateX => _grid.CoordinateX;
+
+        public int CoordinateY => _grid.CoordinateY;
 
         public void TurnLeft()
         {
@@ -41,10 +40,6 @@ namespace RoverKata
             return Direction.MoveBackward();
         }
 
-        public int CoordinateX => _grid.CoordinateX;
-
-        public int CoordinateY => _grid.CoordinateY;
-
         public override string ToString()
         {
             return $"X : {CoordinateX}, Y : {CoordinateY}, Direction : {Direction}";
@@ -53,9 +48,9 @@ namespace RoverKata
 
         public string ExecuteCommands(string command)
         {
-            char[] commands = command.ToCharArray();
+            var commands = command.ToCharArray();
 
-            for (int index = 0; index < commands.Length; index++)
+            for (var index = 0; index < commands.Length; index++)
             {
                 var comm = commands[index];
                 if (comm == 'L')
@@ -101,8 +96,6 @@ namespace RoverKata
             }
 
             return null;
-
         }
-
     }
 }

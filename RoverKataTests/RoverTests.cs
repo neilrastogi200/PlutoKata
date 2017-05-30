@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using NUnit.Framework;
-using RoverKata;
 using RoverKata.Direction;
 using RoverKata.Grid;
 using RoverKata.ObstacleDetection;
+using RoverKata.Rover;
 
 namespace RoverKataTests
 {
@@ -19,11 +18,11 @@ namespace RoverKataTests
                 new ObstacleDetection {XCoordinate = 3, YCoordinate = 3}
             };
 
-
             _grid = new Grid(100, obstacleDetections);
         }
 
         private IGrid _grid;
+
 
         [Test]
         [TestCase("RFLFFRF", 2, 2, "East")]
@@ -94,9 +93,9 @@ namespace RoverKataTests
             rover.ExecuteCommands(command);
 
             //Assert
-            Assert.AreEqual(rover.CoordinateX,3);
-            Assert.AreEqual(rover.CoordinateY,5);
-            Assert.AreEqual(_grid.ObstacleDetected[0].Message,expectedMessage);
+            Assert.AreEqual(rover.CoordinateX, 3);
+            Assert.AreEqual(rover.CoordinateY, 5);
+            Assert.AreEqual(_grid.ObstacleDetected[0].Message, expectedMessage);
         }
 
 

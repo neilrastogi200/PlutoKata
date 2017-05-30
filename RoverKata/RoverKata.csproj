@@ -50,10 +50,11 @@
     <Compile Include="Grid\Grid.cs" />
     <Compile Include="Direction\ICardinalDirectionPoint.cs" />
     <Compile Include="Grid\IGrid.cs" />
+    <Compile Include="Rover\IRover.cs" />
     <Compile Include="ObstacleDetection\ObstacleDetection.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Rover.cs" />
+    <Compile Include="Rover\Rover.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

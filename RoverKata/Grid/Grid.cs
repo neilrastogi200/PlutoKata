@@ -31,14 +31,6 @@ namespace RoverKata.Grid
             }
 
             return true;
-
-
-            //if (CoordinateY < _gridSize)
-            //{
-            //    CoordinateY++;
-            //}
-
-            //return IsObstacleDetected(CoordinateX, CoordinateY);
         }
 
         public bool IncreaseForwardPositionX()
@@ -65,20 +57,10 @@ namespace RoverKata.Grid
             }
 
             return true;
-
-
-
-            //if (CoordinateY > 0)
-            //{
-            //    CoordinateY--;
-            //}
-
-            //return IsObstacleDetected(CoordinateX, CoordinateY);
         }
 
         public bool DecreaseBackwardPositionX()
         {
-
             var newXPosition = CoordinateX - 1;
 
             if (IsObstacleDetected(newXPosition, CoordinateY) == false && newXPosition > 0)
@@ -88,15 +70,6 @@ namespace RoverKata.Grid
             }
 
             return true;
-
-
-            //if (CoordinateX > 0)
-            //{
-            //    CoordinateX--;
-            //}
-
-
-            //return IsObstacleDetected(CoordinateX, CoordinateY);
         }
 
 
@@ -110,7 +83,6 @@ namespace RoverKata.Grid
                     return true;
                 }
             }
-
 
             return false;
         }

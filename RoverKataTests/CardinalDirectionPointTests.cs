@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using NUnit.Framework;
-using RoverKata;
 using RoverKata.Direction;
 using RoverKata.Grid;
 using RoverKata.ObstacleDetection;
@@ -19,27 +14,16 @@ namespace RoverKataTests
         [SetUp]
         public void Setup()
         {
-            List<ObstacleDetection> obstacleDetections = new List<ObstacleDetection>() {new ObstacleDetection() {XCoordinate = 2, YCoordinate = 1} };
-                
-                
-                
-                _grid = new Grid(100, obstacleDetections );
+            var obstacleDetections = new List<ObstacleDetection>
+            {
+                new ObstacleDetection {XCoordinate = 2, YCoordinate = 1}
+            };
+
+
+            _grid = new Grid(100, obstacleDetections);
         }
 
-        [Test]
-        public void When_Command_Is_Turn_Right_Expected_Direction_Is_East()
-        {
-            //Arrange
-            var directionPoint = new North(_grid);
-
-            //Act
-           var actualResult = directionPoint.TurnRight();
-
-            //Assert
-            Assert.That(actualResult,Is.TypeOf(typeof(East)));
         
-        }
-
         [Test]
         public void When_Command_Is_Turn_Left_Expected_Direction_Is_West()
         {
@@ -50,7 +34,20 @@ namespace RoverKataTests
             var actualResult = directionPoint.TurnLeft();
 
             //Assert
-            Assert.That(actualResult, Is.TypeOf(typeof(West)));
+            Assert.That(actualResult, Is.TypeOf(typeof (West)));
+        }
+
+        [Test]
+        public void When_Command_Is_Turn_Right_Expected_Direction_Is_East()
+        {
+            //Arrange
+            var directionPoint = new North(_grid);
+
+            //Act
+            var actualResult = directionPoint.TurnRight();
+
+            //Assert
+            Assert.That(actualResult, Is.TypeOf(typeof (East)));
         }
 
 
@@ -78,7 +75,6 @@ namespace RoverKataTests
 
             //Assert
             Assert.That(actualResult, Is.TypeOf<South>());
-
         }
 
         [Test]
@@ -106,6 +102,5 @@ namespace RoverKataTests
             //Assert
             Assert.That(actualResult, Is.TypeOf<West>());
         }
-
     }
 }
